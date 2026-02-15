@@ -42,7 +42,6 @@ if (empty($services))     { $errors[] = "Minst en tjänst måste väljas"; }
 
 // Vid fel -> skicka tillbaka till en enkel felsida
 if (!empty($errors)) {
-  // Du kan här spara fel/POST i logg om du vill.
   header("Location: error.html", true, 303);
   exit;
 }
@@ -92,7 +91,7 @@ $body_customer =
 "- RUT-avdrag: $rut\n\n".
 "Med vänlig hälsning,\n".
 "Städ da´X AB\n".
-"E-post: timmy.larsson@hotmail.com\n".
+"E-post: info@stad-dax.com\n".
 "Telefon städtjänster: 072-565 22 06\n".
 "Skadedjur: 072-565 22 07";
 

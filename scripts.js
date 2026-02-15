@@ -1,58 +1,62 @@
-// Mobilmeny
-const nav = document.querySelector('.main-nav');
-const toggle = document.querySelector('.nav-toggle');
-if (toggle && nav) {
-  toggle.addEventListener('click', () => {
-    const expanded = nav.getAttribute('aria-expanded') === 'true';
-    nav.setAttribute('aria-expanded', String(!expanded));
-    toggle.setAttribute('aria-expanded', String(!expanded));
-  });
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const id = a.getAttribute('href');
-      const el = document.querySelector(id);
-      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
-      nav.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("Skriptet laddat!");
+
+    const navMenu = document.getElementById('nav-menu');
+    const navToggle = document.querySelector('.nav-toggle');
+
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', (e) => {
+            console.log("Knapp klickad!");
+            const isOpened = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', !isOpened);
+            navMenu.classList.toggle('nav-open');
+        });
+
+        // Stäng menyn när man klickar på en länk (för mobil)
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('nav-open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+
+    // Sätt minsta datum till "nu"
+const startDateInput = document.getElementById('start_date');
+
+if (startDateInput) {
+    const nu = new Date();
+
+    const year = nu.getFullYear();
+    const month = String(nu.getMonth() + 1).padStart(2, '0');
+    const day = String(nu.getDate()).padStart(2, '0');
+    const hours = String(nu.getHours()).padStart(2, '0');
+    const minutes = String(nu.getMinutes()).padStart(2, '0');
+    
+    const minDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+    
+    startDateInput.setAttribute('min', minDateTime);
 }
 
-// Klientvalidering
-const form = document.getElementById('offerForm');
-const statusEl = document.getElementById('formStatus');
-if (form) {
-  form.addEventListener('submit', (e) => {
-    const servicesChecked = form.querySelectorAll('input[name="services[]"]:checked').length > 0;
-    if (!servicesChecked) {
-      e.preventDefault();
-      statusEl.textContent = 'Välj minst en tjänst tack.';
-      return;
-    }
-    const required = ['name', 'email', 'phone', 'zip', 'frequency'];
-    for (const n of required) {
-      const el = form.querySelector(`[name="${n}"]`);
-      if (!el || !el.value.trim()) {
-        e.preventDefault();
-        statusEl.textContent = 'Fyll i alla obligatoriska fält.';
-        if (el) el.focus();
-        return;
-      }
-    }
-    statusEl.textContent = 'Skickar…';
-  });
-}
+const endDateInput = document.getElementById('end_date');
 
-// Auto-uppdatera årtal i footer
-const y = document.getElementById('year');
-if (y) y.textContent = new Date().getFullYear();
+startDateInput.addEventListener('change', () => {
+    // När användaren valt startdatum, sätt det som min-värde för slutdatumet
+    endDateInput.setAttribute('min', startDateInput.value);
+});
 
-// Scrolla till formuläret när panelen öppnas
-const offerPanel = document.getElementById('offerPanel');
-if (offerPanel) {
-  offerPanel.addEventListener('toggle', () => {
-    if (offerPanel.open) {
-      offerPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // --- Övrig kod ---
+    const y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+
+    // Formulär-scroll
+    const offerPanel = document.getElementById('offerPanel');
+    if (offerPanel) {
+        offerPanel.addEventListener('toggle', () => {
+            if (offerPanel.open) {
+                offerPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
     }
-  });
-}
+});

@@ -3,40 +3,34 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Städ dax AB – Städning & Skadedjursbekämpning i Värnamo</title>
-  <meta name="description" content="Städ da´X AB i Värnamo. Hemstädning, företagsstädning, flyttstäd och skadedjursbekämpning. Boka gratis kundbesök.">
+  <title>Städ Da´X</title>
+  <meta name="description" content="Städ da´X AB i Värnamo. Hemstädning, företagsstädning, flyttstäd, fönsterputs, golvvård, byggstäd, trappstädning och skadedjursbekämpning. Boka gratis kundbesök." />
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/x-icon" href="assets/logo.png">
 </head>
 <body>
-<header class="site-header">
-  <div class="header-container">
+  <header class="site-header">
     <a class="brand" href="#top" aria-label="Startsida">
-      <img src="assets/logo.png" alt="" width="400" height="40" />
-      <span class="brand-text"> <span class="ab"></span></span>
+      <img src="assets/logo.svg" alt="" width="36" height="36" />
+      <span>Städ da´X AB</span>
     </a>
-
-    <nav class="main-nav" id="nav-menu">
+    <nav class="main-nav" aria-label="Huvudmeny">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list">Meny</button>
       <ul id="nav-list">
         <li><a href="#top">Hem</a></li>
         <li><a href="#tjanster">Tjänster</a></li>
         <li><a href="#offert">Formulär</a></li>
-        <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
       </ul>
     </nav>
-
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Öppna meny">
-      <span class="hamburger"></span>
-    </button>
-  </div>
-</header>
+  </header>
 
   <main id="top">
     <section class="hero">
       <div class="hero-inner">
         <div class="hero-copy">
           <h1>Unna dig lyxen av ett skinande rent hem eller kontor</h1>
-          <p>Vi hjälper företag och privatpersoner med städning och skadedjursbekämpning – säkert, prisvärt och med nöjd-kund-garanti.</p>
+          <p>Vi hjälper privatpersoner och företag med städning och skadedjursbekämpning – säkert, prisvärt och med nöjd-kund-garanti.</p>
           <ul class="ticks">
             <li>Kollektivanslutna & ansvarsförsäkring</li>
             <li>Utbildad, bakgrundskontrollerad personal</li>
@@ -48,35 +42,13 @@
 
     <section id="tjanster" class="section">
       <h2>Tjänster vi utför</h2>
-      <p class="small-muted" style="text-align:center; margin-bottom:20px;">Klicka på en tjänst för att läsa mer</p>
-      
-      <div class="service-group">
-        <details class="service-card">
-        <summary><h3>Skadedjursbekämpning</h3></summary>
-        <div class="content">
-            <p>Vi hanterar möss, råttor, myror och andra skadedjur. Säkra metoder och full dokumentation ingår.</p>
-        </div>
-        </details>
-        <details class="service-card">
-          <summary><h3>Företagsstädning</h3></summary>
-          <div class="content"><p>Professionell städning för kontor, personalutrymmen och industrilokaler – även kringservice.</p></div>
-        </details>
-        <details class="service-card">
-          <summary><h3>Hemstädning</h3></summary>
-          <div class="content"><p>Flexibla upplägg, samma kontaktperson och trygg personal för ditt hem.</p></div>
-        </details>
-        <details class="service-card">
-          <summary><h3>Storstädning</h3></summary>
-          <div class="content"><p>Grundlig genomgång av hela bostaden enligt en noggrann checklista.</p></div>
-        </details>
-        <details class="service-card">
-          <summary><h3>Flyttstädning</h3></summary>
-          <div class="content"><p>Fast pris med besiktningsgaranti. Vi sköter RUT-avdraget.</p></div>
-        </details>
-        <details class="service-card">
-          <summary><h3>Fönsterputsning</h3></summary>
-          <div class="content"><p>Streckfritt resultat, vi hanterar även höghöjdsarbeten via partners.</p></div>
-        </details>
+      <div class="cards">
+        <article class="card"><h3>Skadedjursbekämpning</h3><p>Möss, råttor, myror m.m. Säkra metoder, dokumentation.</p></article>
+        <article class="card"><h3>Företagsstädning</h3><p>Kontor, personalutrymmen, industrilokaler – även kringservice.</p></article>
+        <article class="card"><h3>Hemstädning</h3><p>Flexibla upplägg, samma kontaktperson, trygg personal.</p></article>
+        <article class="card"><h3>Storstädning</h3><p>Grundlig genomgång enligt checklista.</p></article>
+        <article class="card"><h3>Flyttstädning</h3><p>Fast pris & besiktningsgaranti. RUT.</p></article>
+        <article class="card"><h3>Fönsterputsning</h3><p>Streckfritt, även höghöjd via partner.</p></article>
       </div>
     </section>
 
@@ -84,7 +56,7 @@
       <details id="offerPanel" class="offer-collapsible">
         <summary class="offer-summary">
           <h2>Formulär</h2>
-          <span class="hint">Klicka här för att öppna</span>
+          <span class="hint">Klicka för att öppna</span>
         </summary>
 
         <div class="offer-body glass offer-card">
@@ -126,15 +98,11 @@
                   <option>Varje månad</option>
                 </select>
               </label>
-              <label>Önskat start datum/tid
-                <input name="start_date" id="start_date" type="datetime-local" />
-              </label>
-
-              <label>Slut datum/tid
-                <input name="end_date" id="end_date" type="datetime-local" />
+              <label>Önskat datum/tid
+                <input name="when" type="datetime-local" />
               </label>
               <label class="span-2">Beskrivning
-                <textarea name="message" placeholder="Kort beskrivning på om du har klickat in Annat/Övrigt eller t.ex. husdjur eller andra specifika önskemål."></textarea>
+                <textarea name="message" rows="3" placeholder="Kort beskrivning, t.ex. 4 rok, husdjur, specifika önskemål…"></textarea>
               </label>
               <label>Fullständigt namn
                 <input name="name" type="text" autocomplete="name" required />
@@ -158,26 +126,26 @@
         </div>
       </details>
     </section>
-
-    <section class="section">
-      <h2 id="headline">Kontakta oss!</h2>
-<section id="kontakt" class="section">
-  <article class="card">
-    <img src="assets/Jannike Breivik.jpg" alt="Jannike Breivik">
-    <h3>Jannike Breivik</h3>
-    <p class="role">Arbetsledare</p>
-    <p>Telefon: <a href="tel:0725652206">072-565 22 06</a></p>
-    <p><a href="mailto:jannike.breivik@stad-dax.com">jannike.breivik@stad-dax.com</a></p>
-  </article>
-
-  <article class="card">
-    <img src="assets/Tommy Enoksson.jpg" alt="Tommy Enoksson">
-    <h3>Tommy Enoksson</h3>
-    <p class="role">Samordnare</p>
-    <p>Telefon: <a href="tel:0725652202">072-565 22 02</a></p>
-    <p><a href="mailto:tommy.enoksson@stad-dax.com">tommy.enoksson@stad-dax.com</a></p>
-  </article>
-</section>
+    <h2 id="headline">Kontakta oss!</h2>
+    <section id="kontakt" class="section">
+      
+      <article class="card">
+        <img src="assets/Jannike Breivik.jpg" alt="">
+      <h2>Jannike Breivik : Arbetsledare</h2>
+      <p>Telefon: 072- 565 22 06</p>
+      <p>jannike.breivik@stad-dax.com <jannike.breivik@stad-dax.com></jannike.breivik>
+        </article></p>
+      <article class="card">
+        <img src="assets/Tommy Enoksson.jpg" alt="">
+      <h2>Tommy Enoksson : Samordnare</h2>
+      <p>Telefon: 072- 565 22 02</p>
+      <p>tommy.enoksson@stad-dax.com <tommy.enoksson@stad-dax.com>>
+      <div class="cards">
+        </article></p>
+      </div>
+    </section>
+    </main>
+    
  <section id="omdomen" class="section">
       <h2>Vad säger våra kunder?</h2>
       <div class="rating-cards">
@@ -189,20 +157,40 @@
         <article class="rating-card">
           <div class="stars" aria-label="4 av 5">★★★★☆</div>
           <p class="quote">“Snabba svar och trevlig personal. Rekommenderas.”</p>
-          <div class="author">– Johan, Bredaryd [Test]</div>
+          <div class="author">– Johan, Bredaryd</div>
         </article>
         <article class="rating-card">
           <div class="stars" aria-label="5 av 5">★★★★★</div>
           <p class="quote">“Smidigt bokningsflöde och superrent resultat!”</p>
-          <div class="author">– Sara, Bor [Test]</div>
+          <div class="author">– Sara, Bor</div>
+        </article>
       </div>
     </section>
-  </main>
 
-  <footer class="site-footer">
-    <p>&copy; <span id="year"></span> Städ da´X AB. Alla rättigheter förbehållna.</p>
-  </footer>
-
-  <script src="scripts.js" defer></script>
+  <script src="script.js" defer></script>
+  <script>
+    function initMap() {
+      const center = { lat: 57.18823784769593, lng: 14.03141569378318 };
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center, zoom: 14, mapTypeControl: false, streetViewControl: false, fullscreenControl: true, zoomControl: true
+      });
+      const svgPin = {
+        path: "M12 2C7.58 2 4 5.58 4 10c0 5.25 8 12 8 12s8-6.75 8-12c0-4.42-3.58-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z",
+        fillColor: "#e53935", fillOpacity: 1, strokeWeight: 0, scale: 1.5, anchor: new google.maps.Point(12, 24)
+      };
+      const marker = new google.maps.Marker({ position: center, map, title: "Städ da´X AB", icon: svgPin, animation: google.maps.Animation.DROP });
+      const info = new google.maps.InfoWindow({
+        content: `
+          <div style="min-width:220px">
+            <strong>Städ da´X AB</strong><br/>Värnamo, Sverige<br/><small>Mån–Fre 7–16</small><br/>
+            <a href="tel:+4635700000">0350-700 00</a> • <a href="tel:+46725652206">072-565 22 06</a><br/>
+            <a target="_blank" href="https://www.google.com/maps?q=57.188238,14.031416">Öppna i Google Maps</a>
+          </div>`
+      });
+      info.open({ anchor: marker, map });
+      marker.addListener("click", () => info.open({ anchor: marker, map }));
+    }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUhQS1YAvDDIkiEH7YsHzf2Cp4dUkMSpQ&callback=initMap"></script>
 </body>
 </html>
