@@ -52,8 +52,7 @@ h2 { font-size: clamp(1.6rem, 4vw, 2.5rem); text-align: center; margin-bottom: 1
   color: var(--muted); transition: 0.2s;
 }
 
-.main-nav a:hover { color: var(--brand); background: rgb(224, 224, 224); }
-.nav-cta { background: var(--brand); color: rgb(255, 255, 255) !important; }
+.main-nav a:hover { color: var(--brand); background: rgba(51, 255, 0, 0.603); }
 
 /* Mobil-knapp (Dold som standard) */
 .nav-toggle {
