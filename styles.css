@@ -125,16 +125,17 @@ h2 { font-size: clamp(1.6rem, 4vw, 2.5rem); text-align: center; margin-bottom: 1
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
   }
 
   /* Behållaren för texten */
-  .hero-copy {
-    max-width: 700px;
-    animation: fadeInUp 0.8s ease-out;
-  }
+.hero-copy {
+  max-width: 700px;
+  margin: 0 auto; /* Centrerar boxen horisontellt */
+  text-align: center; /* Centrerar all text inuti */
+  animation: fadeInUp 0.8s ease-out;
+}
 
   .hero-copy h1 {
     font-size: clamp(2.5rem, 6vw, 4rem);
@@ -145,12 +146,12 @@ h2 { font-size: clamp(1.6rem, 4vw, 2.5rem); text-align: center; margin-bottom: 1
     letter-spacing: -0.02em;
   }
 
-  .hero-copy p {
-    font-size: 1.25rem;
-    color: var(--muted);
-    margin-bottom: 40px;
-    max-width: 600px;
-  }
+.hero-copy p {
+  font-size: 1.25rem;
+  color: var(--muted);
+  margin: 0 auto 40px auto; /* Centrerar paragrafen och behåller bottenmarginalen */
+  max-width: 600px;
+}
 
   /* Styling för bock-listan */
   .ticks {
