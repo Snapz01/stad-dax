@@ -1,62 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Skriptet laddat!");
-
-    const navMenu = document.getElementById('nav-menu');
-    const navToggle = document.querySelector('.nav-toggle');
-
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', (e) => {
-            console.log("Knapp klickad!");
-            const isOpened = navToggle.getAttribute('aria-expanded') === 'true';
-            navToggle.setAttribute('aria-expanded', !isOpened);
-            navMenu.classList.toggle('nav-open');
-        });
-
-        // Stäng menyn när man klickar på en länk (för mobil)
-        const navLinks = navMenu.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('nav-open');
-                navToggle.setAttribute('aria-expanded', 'false');
-            });
-        });
-    }
-
-    // Sätt minsta datum till "nu"
-const startDateInput = document.getElementById('start_date');
-
-if (startDateInput) {
-    const nu = new Date();
-
-    const year = nu.getFullYear();
-    const month = String(nu.getMonth() + 1).padStart(2, '0');
-    const day = String(nu.getDate()).padStart(2, '0');
-    const hours = String(nu.getHours()).padStart(2, '0');
-    const minutes = String(nu.getMinutes()).padStart(2, '0');
     
-    const minDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
-    
-    startDateInput.setAttribute('min', minDateTime);
-}
+    // --- 1) Accordion Logic with Auto-Wrapper ---
+    const cards = document.querySelectorAll('.service-card');
 
-const endDateInput = document.getElementById('end_date');
+    cards.forEach(card => {
+        // We need a wrapper div inside .content for the grid animation to work.
+        // This code adds it automatically if it's missing!
+        const content = card.querySelector('.content');
+        if (content && !content.querySelector('.content-inner')) {
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('content-inner');
+            while (content.firstChild) {
+                wrapper.appendChild(content.firstChild);
+            }
+            content.appendChild(wrapper);
+        }
 
-startDateInput.addEventListener('change', () => {
-    // När användaren valt startdatum, sätt det som min-värde för slutdatumet
-    endDateInput.setAttribute('min', startDateInput.value);
-});
-
-    // --- Övrig kod ---
-    const y = document.getElementById('year');
-    if (y) y.textContent = new Date().getFullYear();
-
-    // Formulär-scroll
-    const offerPanel = document.getElementById('offerPanel');
-    if (offerPanel) {
-        offerPanel.addEventListener('toggle', () => {
-            if (offerPanel.open) {
-                offerPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Close other cards when one is opened
+        card.querySelector('summary').addEventListener('click', (e) => {
+            if (!card.open) {
+                cards.forEach(otherCard => {
+                    if (otherCard !== card) otherCard.removeAttribute('open');
+                });
             }
         });
+    });
+
+    // --- 2) Mobile Menu ---
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', !expanded);
+            navMenu.classList.toggle('nav-open');
+        });
     }
+
+    // --- 3) Form Date Logic ---
+    const startInput = document.getElementById('start_date');
+    const endInput = document.getElementById('end_date');
+
+    if (startInput) {
+        const now = new Date();
+        startInput.min = now.toISOString().slice(0, 16);
+        
+        startInput.addEventListener('change', () => {
+            if (endInput) endInput.min = startInput.value;
+        });
+    }
+
+    // --- 4) Footer Year ---
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 });
