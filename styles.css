@@ -100,6 +100,21 @@ h2 { font-size: clamp(1.6rem, 4vw, 2.5rem); text-align: center; margin-bottom: 1
   justify-content: center;
 }
 
+#Hero-header-text {
+  color: rgba(0, 162, 255, 0.685);
+  text-align: center;
+  font-style: italic;
+  font-size: 4em; /* Standard för desktop */
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+/* Mobilinställning */
+@media (max-width: 768px) {
+  #Hero-header-text {
+    font-size: 2em; /* Tvingar texten till hälften på mobil */
+  }
+}
 .hero-inner { 
   max-width: 1200px; 
   text-align: center; 
