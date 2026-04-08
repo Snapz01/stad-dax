@@ -1,24 +1,25 @@
 <?php
 // ---- Grundinställningar ----
-$to = "info@stad-dax.com";       // Mottagare (företaget)
-$from_address = "info@stad-dax.com"; // Avsändaradress på er domän (för SPF/DKIM)
+$to = "info@stad-dax.com";           // Mottagare (företaget)
+$from_address = "info@stad-dax.com"; // Avsändaradress på er domän
 $subject = "Ny offertförfrågan via webbplatsen";
 
-// Hjälpfunktion för sanering
+// Uppdaterad hjälpfunktion för e-postvänlig sanering
 function clean($v) {
-  return trim(filter_var($v, FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+    // Vi använder strip_tags för att få bort HTML, men behåller svenska tecken intakta
+    return trim(strip_tags($v));
 }
 
 // Bara POST tillåts
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-  header("Location: /", true, 303);
-  exit;
+    header("Location: /", true, 303);
+    exit;
 }
 
 // Honeypot – om ifylld => avbryt tyst
 if (!empty($_POST['website'])) {
-  header("Location: thank-you.html", true, 303);
-  exit;
+    header("Location: thank-you.html", true, 303);
+    exit;
 }
 
 // Plocka värden + validera
@@ -41,11 +42,11 @@ if (empty($services)) { $errors[] = "Minst en tjänst måste väljas"; }
 
 // Vid fel -> skicka tillbaka till en enkel felsida
 if (!empty($errors)) {
-  header("Location: error.html", true, 303);
-  exit;
+    header("Location: error.html", true, 303);
+    exit;
 }
 
-// Sätt ihop e-posttext
+// Sätt ihop e-posttext (Nu utan HTML-entiteter)
 $services_str = is_array($services) ? implode(", ", array_map('clean', $services)) : clean($services);
 
 $body_company =
@@ -98,12 +99,11 @@ $headers_customer .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
 $ok2 = @mail($email, $subject_customer, $body_customer, $headers_customer);
 
-// Oavsett kopian, om företagsmejlet gick iväg: redirect till tack-sida
+// Redirect till tack-sida
 if ($ok1) {
-  header("Location: thank-you.html", true, 303);
-  exit;
+    header("Location: thank-you.html", true, 303);
+    exit;
 }
 
-// Om det blev fel att skicka till företaget -> fel-sida
 header("Location: error.html", true, 303);
 exit;
