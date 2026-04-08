@@ -1,7 +1,7 @@
 <?php
 // ---- Grundinställningar ----
-$to = "timmy.larsson@hotmail.com";       // Mottagare (företaget)
-$from_address = "timmy.larsson@hotmail.com"; // Avsändaradress på er domän (för SPF/DKIM)
+$to = "info@stad-dax.com";       // Mottagare (företaget)
+$from_address = "info@stad-dax.com"; // Avsändaradress på er domän (för SPF/DKIM)
 $subject = "Ny offertförfrågan via webbplatsen";
 
 // Hjälpfunktion för sanering
@@ -22,23 +22,22 @@ if (!empty($_POST['website'])) {
 }
 
 // Plocka värden + validera
-$name  = clean($_POST['name'] ?? '');
-$email = filter_var(trim($_POST['email'] ?? ''), FILTER_VALIDATE_EMAIL);
-$phone = clean($_POST['phone'] ?? '');
-$zip   = clean($_POST['zip'] ?? '');
-$area  = clean($_POST['area'] ?? '');
+$name      = clean($_POST['name'] ?? '');
+$email     = filter_var(trim($_POST['email'] ?? ''), FILTER_VALIDATE_EMAIL);
+$phone     = clean($_POST['phone'] ?? '');
+$location  = clean($_POST['Ort'] ?? ''); 
+$area      = clean($_POST['area'] ?? '');
 $frequency = clean($_POST['frequency'] ?? '');
-$when  = clean($_POST['when'] ?? '');
-$message = clean($_POST['message'] ?? '');
-$rut   = isset($_POST['rut']) ? 'Ja' : 'Nej';
-$services = $_POST['services'] ?? [];
+$when      = clean($_POST['start_date'] ?? ''); 
+$message   = clean($_POST['message'] ?? '');
+$services  = $_POST['services'] ?? [];
 
 $errors = [];
-if (!$name)               { $errors[] = "Namn saknas"; }
-if (!$email)              { $errors[] = "Ogiltig e-post"; }
-if (!$phone)              { $errors[] = "Telefon saknas"; }
-if (!$zip)                { $errors[] = "Postnummer saknas"; }
-if (empty($services))     { $errors[] = "Minst en tjänst måste väljas"; }
+if (!$name)      { $errors[] = "Namn saknas"; }
+if (!$email)     { $errors[] = "Ogiltig e-post"; }
+if (!$phone)     { $errors[] = "Telefon saknas"; }
+if (!$location)  { $errors[] = "Ort saknas"; }
+if (empty($services)) { $errors[] = "Minst en tjänst måste väljas"; }
 
 // Vid fel -> skicka tillbaka till en enkel felsida
 if (!empty($errors)) {
@@ -52,7 +51,7 @@ $services_str = is_array($services) ? implode(", ", array_map('clean', $services
 $body_company =
 "Ny offertförfrågan via webbplatsen\n\n".
 "Tjänster: $services_str\n".
-"Postnummer: $zip\n".
+"Ort: $location\n".
 "Yta: $area m²\n".
 "Frekvens: $frequency\n".
 "Önskat datum/tid: $when\n".
@@ -60,7 +59,6 @@ $body_company =
 "Namn: $name\n".
 "E-post: $email\n".
 "Telefon: $phone\n".
-"RUT-avdrag: $rut\n".
 "IP: ".($_SERVER['REMOTE_ADDR'] ?? 'okänd')."\n".
 "Datum: ".date('Y-m-d H:i');
 
@@ -79,7 +77,7 @@ $body_customer =
 "Tack för din förfrågan! Vi återkommer så snart vi kan.\n\n".
 "Du skickade:\n".
 "- Tjänster: $services_str\n".
-"- Postnummer: $zip\n".
+"- Ort: $location\n".
 "- Yta: $area m²\n".
 "- Frekvens: $frequency\n".
 "- Önskat datum/tid: $when\n".
@@ -87,8 +85,7 @@ $body_customer =
 "Kontaktuppgifter:\n".
 "- Namn: $name\n".
 "- Telefon: $phone\n".
-"- E-post: $email\n".
-"- RUT-avdrag: $rut\n\n".
+"- E-post: $email\n\n".
 "Med vänlig hälsning,\n".
 "Städ da´X AB\n".
 "E-post: info@stad-dax.com\n".

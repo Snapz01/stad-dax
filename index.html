@@ -140,7 +140,7 @@
         <div class="content">
             <p>Har du problem med möss, råttor, myror, getingar eller andra skadedjur? </p>
            <p> Med rätt kompetens 
-            SO 1</a> utför vi kostnadseffektiva tjänster inom skadedjursbekämpning.</p>
+            SO 1 utför vi kostnadseffektiva tjänster inom skadedjursbekämpning.</p>
           Vi följer upp arbetet enligt överenskommelse och kontakt görs via telefon, sms eller mail.<br>
             <br>
             <a href="mailto:info@stad-dax.com" style="color: rgb(0, 38, 255);">Klicka här för kontakt</a>
@@ -210,7 +210,6 @@
 <br>    
 
 
-<!--
 <section id="offert" class="section">
         <div class="offer-body glass offer-card">  
            <summary><h2 style="text-align: left; color:rgb(0,0,0);"></h3></summary>
@@ -219,7 +218,7 @@
 
             <fieldset class="services">
               <legend>Vad vill du ha hjälp med?</legend>
-              <div class="service-grid">
+              <div class="service-grid" id="service-toggles">
                 <label><input type="checkbox" name="services[]" value="Skadedjursbekämpning"> Skadedjursbekämpning</label>
                 <label><input type="checkbox" name="services[]" value="Företagsstäd"> Företagsstäd</label>
                 <label><input type="checkbox" name="services[]" value="Hemstäd"> Hemstäd</label>
@@ -270,17 +269,20 @@
               <label>Telefon
                 <input name="phone" type="tel" autocomplete="tel" required />
               </label>
-
+            <br>
             </div>
-
+            <br>
             <button class="btn primary" type="submit">Skicka förfrågan</button>
             <p id="formStatus" role="status" aria-live="polite" class="status"></p>
-            <p class="tiny">Genom att skicka godkänner du vår behandling av uppgifterna för att hantera din förfrågan.</p>
+            <p>Efter Formuläret har skickats kommer vi att kontakta dig inom snart för att hantera din förfrågan.</p>
+            <p class="tiny">
+            Genom att skicka förfrågan godkänner du att Städ da´X AB behandlar dina personuppgifter för att kunna kontakta dig och lämna offert. 
+            Läs mer om hur vi hanterar dina uppgifter i vår <a href="integritetspolicy.html">integritetspolicy</a>.
+            </p>
           </form>
         </div>
     </section>
 
---->
 
     <section class="section">
       <h2 id="headline" style="color: rgba(0, 0, 0, 0.781);">Kontakta oss!</h2>
@@ -302,7 +304,6 @@
     <h3>Lisa Rutensjö</h3>
     <p class="role">Arbetsledare</p>
     <p class="contact-cta-card">Telefon: <a href="tel:0725652204"style="color: blue;">072-565 22 04</a></p>
-    <!-- Dubbel kolla mail stämmer LISA-->
     <p class="contact-cta-card" style="color: blue;"><a href="mailto:lisa.rutensjo@stad-dax.com">Klicka här för att maila mig</a></p>
   </article>
 
@@ -340,7 +341,10 @@
 -->
 
   <footer class="site-footer">
+    
     <p>&copy; <span id="year"></span> Städ da´X AB. Alla rättigheter förbehållna.</p>
+    <p><a href="integritetspolicy.html" style="color: #8a8a8a; font-size: 0.8rem;">Integritetspolicy</a></p>
+
   </footer>
 
   <script src="scripts.js" defer></script>
