@@ -1,12 +1,67 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1) Accordion Logic with Auto-Wrapper ---
-    const cards = document.querySelectorAll('.service-card');
+    // --- 1) FORM HANDLING & VALIDATION ---
+    const form = document.getElementById('offerForm');
 
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            let hasError = false;
+
+            // 1. Validera vanliga textfält/selects (Markerade med required)
+            const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
+            requiredFields.forEach(field => {
+                field.classList.remove('input-error');
+                
+                // Om fältet är tomt
+                if (!field.value.trim()) {
+                    field.classList.add('input-error');
+                    hasError = true;
+                }
+            });
+
+            // 2. Validera tjänsterna (Checkbox-gruppen i #service-toggles)
+            const serviceGrid = document.getElementById('service-toggles');
+            if (serviceGrid) {
+                const serviceCheckboxes = serviceGrid.querySelectorAll('input[name="services[]"]');
+                const isAnyServiceChecked = Array.from(serviceCheckboxes).some(cb => cb.checked);
+
+                if (!isAnyServiceChecked) {
+                    serviceGrid.style.border = "2px solid #ff0000"; // Röd ram vid fel
+                    serviceGrid.style.borderRadius = "10px";
+                    hasError = true;
+                } else {
+                    serviceGrid.style.border = "none";
+                }
+            }
+
+            // Stoppa inskick om fel finns
+            if (hasError) {
+                e.preventDefault();
+                alert("Vänligen fyll i alla obligatoriska fält markerade med rött.");
+            }
+        });
+
+        // Ta bort rött fält direkt när användaren börjar skriva/ändra
+        form.querySelectorAll('input, textarea, select').forEach(input => {
+            input.addEventListener('input', () => {
+                input.classList.remove('input-error');
+            });
+            // Specifik lyssnare för checkboxar för att ta bort röd ram på gridden
+            if (input.name === "services[]") {
+                input.addEventListener('change', () => {
+                    const serviceGrid = document.getElementById('service-toggles');
+                    if (serviceGrid) serviceGrid.style.border = "none";
+                });
+            }
+        });
+    }
+
+    // --- 2) ACCORDION LOGIC ---
+    const cards = document.querySelectorAll('.service-card');
     cards.forEach(card => {
-        // We need a wrapper div inside .content for the grid animation to work.
-        // This code adds it automatically if it's missing!
         const content = card.querySelector('.content');
+        
+        // Auto-wrapper fix
         if (content && !content.querySelector('.content-inner')) {
             const wrapper = document.createElement('div');
             wrapper.classList.add('content-inner');
@@ -16,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             content.appendChild(wrapper);
         }
 
-        // Close other cards when one is opened
+        // Stäng andra kort när ett öppnas
         card.querySelector('summary').addEventListener('click', (e) => {
             if (!card.open) {
                 cards.forEach(otherCard => {
@@ -26,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 2) Mobile Menu ---
+    // --- 3) MOBILE MENU ---
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.getElementById('nav-menu');
 
@@ -38,20 +93,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 3) Form Date Logic ---
+    // --- 4) DATE LOGIC (Sätt dagens datum som minimum) ---
     const startInput = document.getElementById('start_date');
-    const endInput = document.getElementById('end_date');
-
     if (startInput) {
         const now = new Date();
-        startInput.min = now.toISOString().slice(0, 16);
-        
-        startInput.addEventListener('change', () => {
-            if (endInput) endInput.min = startInput.value;
-        });
+        // Justerar till lokal tid för ISO-sträng (YYYY-MM-DDTHH:MM)
+        const localNow = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+        startInput.min = localNow;
     }
 
-    // --- 4) Footer Year ---
+    // --- 5) FOOTER YEAR ---
     const yearSpan = document.getElementById('year');
     if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 });
