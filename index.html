@@ -207,13 +207,13 @@
 
 <section id="offert" class="section">
         <div class="offer-body glass offer-card">  
-           <summary><h2 style="text-align: left; color:rgb(0,0,0);"></h3></summary>
           <form id="offerForm" action="sendmail.php" method="POST" novalidate>
             <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:.01" aria-hidden="true">
             <h2>Formulär</h2>
             <fieldset class="services">
               <legend>Vad vill du ha hjälp med?</legend>
-              <p>Välj minst en av tjänsterna nedan: ↓ *
+              <p style="color: red;">* markerade fält är obligatoriska</p>
+              <p style="color: red;">Välj minst en av tjänsterna nedan: ↓ *
               <div class="service-grid" id="service-toggles">
                 <label><input type="checkbox" name="services[]" value="Skadedjursbekämpning"> Skadedjursbekämpning</label>
                 <label><input type="checkbox" name="services[]" value="Företagsstäd"> Företagsstäd</label>
@@ -232,7 +232,7 @@
             </fieldset>
 
             <div class="grid_wide">
-                <label>Ort *
+                <label style="color: red;">Ort *
               <input name="Ort" type="text" autocomplete="name" required/>
               <span class="error-msg"></span>
               </label>
@@ -258,27 +258,38 @@
               <label class="span-2">Beskrivning
                 <textarea name="message" placeholder="Kort beskrivning på om du har klickat in Annat/Övrigt eller t.ex. husdjur eller andra specifika önskemål."></textarea>
               </label> 
-              <label>Namn *
+              <label style="color: red;">Namn *
                 <input name="name" type="text" autocomplete="name" required />
                 <span class="error-msg"></span>
               </label>
-              <label>E-post *
+              <label style="color: red;">E-post *
                 <input name="email" type="email" autocomplete="email" required />
                 <span class="error-msg"></span>
               </label>
-              <label>Telefon *
+              <label style="color: red;">Telefon *
                 <input name="phone" type="tel" autocomplete="tel" required />
                 <span class="error-msg"></span>
               </label>
             <br>
             </div>
             <br>
-            <button class="btn primary" type="submit">Skicka förfrågan</button>
+<div class="policy-section">
+    <label class="policy-control-button">
+        <input type="checkbox" id="policy_agreement">
+        <span class="custom-checkbox"></span>
+        <span class="policy-label-text">
+            Jag godkänner att Städ da´X AB behandlar mina personuppgifter enligt 
+            <a href="integritetspolicy.html" target="_blank" onclick="event.stopPropagation();">integritetspolicyn</a>.
+        </span>
+    </label>
+</div>
+          <br>
+            <button id="submitBtn" class="btn primary" type="submit" disabled>Skicka förfrågan</button>
             <p id="formStatus" role="status" aria-live="polite" class="status"></p>
-            <p>Efter Formuläret har skickats kommer vi att kontakta dig inom kort för att hantera din förfrågan.</p>
+            <p style="text-align: center;  color: #666; font-size: 1rem;  font-style: italic;  margin-top: 15px;">
+              Efter Formuläret har skickats kommer vi att kontakta dig inom kort för att hantera din förfrågan.
+            </p>
             <p class="tiny">
-            Genom att skicka förfrågan godkänner du att Städ da´X AB behandlar dina personuppgifter för att kunna kontakta dig och lämna offert. 
-            Läs mer om hur vi hanterar dina uppgifter i vår <a style="color: blue;" href="integritetspolicy.html">integritetspolicy</a>.
             </p>
           </form>
         </div>

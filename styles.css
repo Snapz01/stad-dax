@@ -353,7 +353,85 @@ h2 { font-size: clamp(1.6rem, 4vw, 2.5rem); text-align: center; margin-bottom: 1
   display: block;
 }
 
+/* 1. Tvinga stil på knappen när den är inaktiverad */
+.offer-card button#submitBtn:disabled,
+.offer-card .btn.primary:disabled {
+    background: #d3d3d3 !important;
+    background-color: #d3d3d3 !important;
+    color: #888888 !important;
+    border: 1px solid #cccccc !important;
+    cursor: not-allowed !important;
+    opacity: 0.7 !important;
+    filter: grayscale(100%) !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
 
+/* 2. Tvinga muspekare och opacity när den är aktiv */
+.offer-card button#submitBtn:not(:disabled) {
+    cursor: pointer !important;
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+.policy-section {
+    margin: 25px 0;
+}
+
+.policy-control-button {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+}
+
+/* Hover-effekt */
+.policy-control-button:hover {
+    border-color: var(--brand);
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* När checkboxen är ikryssad */
+.policy-control-button:has(input:checked) {
+    border-color: #28a745; /* Grön ram för godkänt */
+    background: rgba(40, 167, 69, 0.05);
+}
+
+/* Göm standard-checkboxen men behåll den för tillgänglighet */
+.policy-control-button input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #28a745; /* Gör bocken grön när vald */
+}
+
+.policy-label-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.4;
+}
+
+.policy-label-text a {
+    color: var(--brand);
+    text-decoration: underline;
+}
+
+/* Mobilanpassning */
+@media (max-width: 600px) {
+    .policy-control-button {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+}
 
 /* ==========================================================================
    5) KONTAKT & FOOTER

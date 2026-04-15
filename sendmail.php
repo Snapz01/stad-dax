@@ -29,7 +29,8 @@ $phone     = clean($_POST['phone'] ?? '');
 $location  = clean($_POST['Ort'] ?? ''); 
 $area      = clean($_POST['area'] ?? '');
 $frequency = clean($_POST['frequency'] ?? '');
-$when      = clean($_POST['start_date'] ?? ''); 
+$when      = str_replace('T', ' - Tid: ', clean($_POST['start_date'] ?? ''));
+$end       = str_replace('T', ' - Tid: ', clean($_POST['end_date'] ?? ''));
 $message   = clean($_POST['message'] ?? '');
 $services  = $_POST['services'] ?? [];
 
@@ -56,6 +57,7 @@ $body_company =
 "Yta: $area m²\n".
 "Frekvens: $frequency\n".
 "Önskat datum/tid: $when\n".
+"Slutdatum: $end\n".
 "Meddelande: $message\n\n".
 "Namn: $name\n".
 "E-post: $email\n".
@@ -82,6 +84,7 @@ $body_customer =
 "- Yta: $area m²\n".
 "- Frekvens: $frequency\n".
 "- Önskat datum/tid: $when\n".
+"- Slutdatum: $end\n".
 "- Meddelande: $message\n\n".
 "Kontaktuppgifter:\n".
 "- Namn: $name\n".
@@ -90,8 +93,7 @@ $body_customer =
 "Med vänlig hälsning,\n".
 "Städ da´X AB\n".
 "E-post: info@stad-dax.com\n".
-"Telefon städtjänster: 072-565 22 06\n".
-"Skadedjur: 072-565 22 07";
+"Telefon: 072-565 22 06\n".
 
 $headers_customer  = "From: Städ da´X AB <{$from_address}>\r\n";
 $headers_customer .= "Reply-To: $to\r\n";

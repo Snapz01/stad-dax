@@ -1,8 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1) FORM HANDLING & VALIDATION ---
+    // --- 1) VARIABLER FÖR FORMULÄR & POLICY ---
     const form = document.getElementById('offerForm');
+    const policyCheckbox = document.getElementById('policy_agreement');
+    const submitBtn = document.getElementById('submitBtn');
 
+    // --- 1.5) POLICY CHECKBOX LOGIC ---
+    // Inaktiverar/Aktiverar skicka-knappen baserat på godkännande
+    if (policyCheckbox && submitBtn) {
+        // Säkerställ korrekt status vid sidladdning
+        submitBtn.disabled = !policyCheckbox.checked;
+
+        policyCheckbox.addEventListener('change', function() {
+            submitBtn.disabled = !this.checked;
+        });
+    }
+
+    // --- 1) FORM HANDLING & VALIDATION ---
     if (form) {
         form.addEventListener('submit', function(e) {
             let hasError = false;
@@ -72,13 +86,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Stäng andra kort när ett öppnas
-        card.querySelector('summary').addEventListener('click', (e) => {
-            if (!card.open) {
-                cards.forEach(otherCard => {
-                    if (otherCard !== card) otherCard.removeAttribute('open');
-                });
-            }
-        });
+        const summary = card.querySelector('summary');
+        if (summary) {
+            summary.addEventListener('click', (e) => {
+                if (!card.open) {
+                    cards.forEach(otherCard => {
+                        if (otherCard !== card) otherCard.removeAttribute('open');
+                    });
+                }
+            });
+        }
     });
 
     // --- 3) MOBILE MENU ---
