@@ -4,7 +4,6 @@ $to = "info@stad-dax.com";           // Mottagare (företaget)
 $from_address = "info@stad-dax.com"; // Avsändaradress på er domän
 $subject = "Ny offertförfrågan via webbplatsen";
 
-// Uppdaterad hjälpfunktion för e-postvänlig sanering
 function clean($v) {
     // Vi använder strip_tags för att få bort HTML, men behåller svenska tecken intakta
     return trim(strip_tags($v));
@@ -22,7 +21,6 @@ if (!empty($_POST['website'])) {
     exit;
 }
 
-// Plocka värden + validera
 $name      = clean($_POST['name'] ?? '');
 $email     = filter_var(trim($_POST['email'] ?? ''), FILTER_VALIDATE_EMAIL);
 $phone     = clean($_POST['phone'] ?? '');
@@ -47,16 +45,15 @@ if (!empty($errors)) {
     exit;
 }
 
-// Sätt ihop e-posttext (Nu utan HTML-entiteter)
 $services_str = is_array($services) ? implode(", ", array_map('clean', $services)) : clean($services);
-
+// Skicka till företaget
 $body_company =
 "Ny offertförfrågan via webbplatsen\n\n".
 "Tjänster: $services_str\n".
 "Ort: $location\n".
 "Yta: $area m²\n".
 "Frekvens: $frequency\n".
-"Önskat datum/tid: $when\n".
+"Önskat Start datum/tid: $when\n".
 "Slutdatum: $end\n".
 "Meddelande: $message\n\n".
 "Namn: $name\n".
@@ -65,12 +62,11 @@ $body_company =
 "IP: ".($_SERVER['REMOTE_ADDR'] ?? 'okänd')."\n".
 "Datum: ".date('Y-m-d H:i');
 
-// Headers till företaget
 $headers_company  = "From: $from_address\r\n";
 $headers_company .= "Reply-To: $email\r\n";
 $headers_company .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-// Skicka till företaget
+
 $ok1 = @mail($to, $subject, $body_company, $headers_company);
 
 // Skicka kopia till kunden
@@ -83,7 +79,7 @@ $body_customer =
 "- Ort: $location\n".
 "- Yta: $area m²\n".
 "- Frekvens: $frequency\n".
-"- Önskat datum/tid: $when\n".
+"- Önskat Start datum/tid: $when\n".
 "- Slutdatum: $end\n".
 "- Meddelande: $message\n\n".
 "Kontaktuppgifter:\n".

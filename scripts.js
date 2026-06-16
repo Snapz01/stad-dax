@@ -114,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const startInput = document.getElementById('start_date');
     if (startInput) {
         const now = new Date();
-        // Justerar till lokal tid för ISO-sträng (YYYY-MM-DDTHH:MM)
         const localNow = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
         startInput.min = localNow;
     }

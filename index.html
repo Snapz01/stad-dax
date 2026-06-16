@@ -252,10 +252,7 @@
             </fieldset>
 
             <div class="grid_wide">
-                <label style="color: red;">Ort *
-              <input name="Ort" type="text" autocomplete="name" required/>
-              <span class="error-msg"></span>
-              </label>
+
               <label>Yta (m²)
                 <input name="area" type="number" min="10" step="1" placeholder="t.ex. 85" />
               </label>
@@ -268,11 +265,10 @@
                   <option>Varje månad</option>
                 </select>
               </label>
-              <br>
-              <label>Önskat start datum/tid 
-                <input name="start_date" id="start_date" type="datetime-local" />
-              </label><label>Slut datum/tid 
-                <input name="end_date" id="end_date" type="datetime-local" />
+              <label>Önskat start datum 
+                <input name="start_date" id="start_datetime" type="date" />
+              </label><label>Slut datum
+                <input name="end_date" id="end_date" type="date" />
               </label>
               <br>
               <label class="span-2">Beskrivning
@@ -285,12 +281,16 @@
               <label style="color: red;">E-post *
                 <input name="email" type="email" autocomplete="email" required />
                 <span class="error-msg"></span>
+              </label>      
+                  <label style="color: red;">Ort *
+              <input name="Ort" type="text" autocomplete="name" required/>
+              <span class="error-msg"></span>
               </label>
               <label style="color: red;">Telefon *
                 <input name="phone" type="tel" autocomplete="tel" required />
                 <span class="error-msg"></span>
               </label>
-            <br>
+           
             </div>
             <br>
 <div class="policy-section">
